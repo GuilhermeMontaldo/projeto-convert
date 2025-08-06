@@ -41,7 +41,7 @@ form.onsubmit = (event) => {
       footer.classList.add("show-result");
 
       // Exibindo a cotação da moeda.
-      description.textContent = `${symbol} 1 = R$ ${price}`;
+      description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`;
     } catch (error) {
       // remove a classe que exibe o footer
       footer.classList.remove("show-result");
@@ -51,6 +51,16 @@ form.onsubmit = (event) => {
     }
   }
 };
+
+// Formata a moeda em Real Brasileiro.
+function formatCurrencyBRL(value) {
+    // Converte para número para utilizar o toLocaleString para formatar no padrão BRL
+    // (R$ 00,00)
+    return Number(value).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    })
+}
 
 /*
 // teste próprio
