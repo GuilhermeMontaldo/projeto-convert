@@ -42,6 +42,20 @@ form.onsubmit = (event) => {
 
       // Exibindo a cotação da moeda.
       description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`;
+
+      // Convertendo o valor para a moeda escolhida
+      let total = amount * price;
+
+      // verifica se o resultado não é um número.
+      if(isNaN(total)){
+        return alert("Por favor, digite o valor corretamente para converter.")
+      }
+
+      // Formatando o valor total.
+      total = formatCurrencyBRL(total).replace("R$", "");
+
+      // Exibindo o valor final.
+      result.textContent = `${total} Reais`;
     } catch (error) {
       // remove a classe que exibe o footer
       footer.classList.remove("show-result");
@@ -54,12 +68,12 @@ form.onsubmit = (event) => {
 
 // Formata a moeda em Real Brasileiro.
 function formatCurrencyBRL(value) {
-    // Converte para número para utilizar o toLocaleString para formatar no padrão BRL
-    // (R$ 00,00)
-    return Number(value).toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-    })
+  // Converte para número para utilizar o toLocaleString para formatar no padrão BRL
+  // (R$ 00,00)
+  return Number(value).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
 }
 
 /*
